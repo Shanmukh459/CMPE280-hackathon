@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.88.1">
+  <title>CMPE280 Hackathon</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/dashboard/">
+
+
+
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="index.css">
+
+
+
+  <!-- Custom styles for this template -->
+</head>
+
+<body>
+
+  <header class="navbar navbar-dark sticky-top flex-md-nowrap p-0 shadow" style="background-color: grey">
+      <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">
+            <img src="./logo1.png" alt="Logo" style="max-width: 50px; max-height: 50px;">
+      </a>
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
+      data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3">Connected</a> -->
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3">Crops</a>
+    <div>
+    </div>
+
+  </header>
+
+  <div class="container-fluid">
+    <div class="row">
+      <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+        <div class="position-sticky pt-3">
+
+          <ul class="nav flex-column mb-2">
+            <li class="nav-item">
+              <a class="nav-link" id="timeseries" href="index.html" style="font-size: large;">
+                <span data-feather="file-text"></span>
+                Time Series Dashboard
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="crops" href="#" style="font-size: large;">
+                <!-- <span data-feather="file-text"></span> -->
+                Crops
+              </a>
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            </li>
+            <li style="margin-left: 15%; "><a href="#" onclick="hide('man')" class="link-dark rounded">Mangoes</a>
+            </li>
+            <li style="margin-left: 15%; "><a href="#" onclick="hide('wal')" class="link-dark rounded">Walnuts</a>
+            </li>
+          </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="import-export" href="importexport.html" style="font-size: large;">
+              <span data-feather="file-text"></span>
+              Imports
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="import" href="yeild.html" style="font-size: large;">
+              <span data-feather="file-text"></span>
+              Yield
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="import" href="sensor.html" style="font-size: large;">
+              <span data-feather="file-text"></span>
+              Sensor
+            </a>
+          </li>
+          </ul>
+          </ul>
+        </div>
+      </nav>
+
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div id="man">
+          <div id="chart_div"></div>
+
+          <h2 style="margin-top: 2%; text-align: center;">Mangoes</h2>
+          <div id="mapm1"></div>
+
+          <div id="mapm2"></div>
+        </div>
+
+        <div id="wal" style="display: none;">
+          <h2 style="margin-top: 2%; text-align: center;">Walnuts</h2>
+          <div id="mapw"></div>
+        </div>
+
+      </main>
+
+    </div>
+  </div>
+
+  <script>
+    // Check if connected or local
+
+    function hide(element) {
+      var x = document.getElementById(element);
+      if (element == "man") {
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        }
+        document.getElementById("wal").style.display = "none";
+      }
+      else if (element == "wal") {
+
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        }
+        document.getElementById("man").style.display = "none";
+      }
+    }
+
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
+    integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
+    integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
+    crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script>
+    google.charts.load('current', {
+      'packages': ['map'],
+      'mapsApiKey': 'AIzaSyDDcPwALh103uGlDrdPVD2xcKmA7BY5Weo'
+    });
+    google.charts.setOnLoadCallback(drawMap);
+
+    function drawMap() {
+      var data = google.visualization.arrayToDataTable([
+        ['Lat', 'Long', 'production'],
+        [16.5662, 121.2626, 10000000],
+        [11.0000, 123.5000, 3000000],
+        [8.4961, 123.3034, 120000000],
+      ]);
+      
+      var options = {
+        showTooltip: true,
+        showInfoWindow: true
+      };
+      var map = new google.visualization.Map(document.getElementById('mapm1'));
+      map.draw(data, options);
+    };
+  </script>
+  <script>
+    google.charts.load('current', {
+      'packages': ['map'],
+      'mapsApiKey': 'AIzaSyDDcPwALh103uGlDrdPVD2xcKmA7BY5Weo'
+    });
+    google.charts.setOnLoadCallback(drawMap);
+
+    function drawMap() {
+      var data = google.visualization.arrayToDataTable([
+        ['Lat', 'Long', 'production'],
+        [17.6868, 83.2185, 10000000],
+        [13.6288, 79.4192, 3000000],
+      ]);
+    
+      var options = {
+        showTooltip: true,
+        showInfoWindow: true
+      };
+      var map = new google.visualization.Map(document.getElementById('mapm2'));
+      map.draw(data, options);
+    };
+  </script>
+  <script>
+    google.charts.load('current', {
+      'packages': ['map'],
+      'mapsApiKey': 'AIzaSyDDcPwALh103uGlDrdPVD2xcKmA7BY5Weo'
+    });
+    google.charts.setOnLoadCallback(drawMap);
+
+    function drawMap() {
+      var data = google.visualization.arrayToDataTable([
+        ['Lat', 'Long', 'production'],
+        [30.2839, 57.0834, 10000000],
+        [34.3277, 47.0778, 3000000],
+        [34.7983, 48.5148, 3000000],
+        [33.5818, 48.3988, 3000000],
+        [30.7246, 50.8456, 3000000],
+        [35.1020, 59.1042, 3000000],
+        [32.1461, 50.5136, 3000000],
+        [38.4281, 45.9071, 3000000],
+        [37.7595, 45.0000, 3000000],
+        [34.6962, 49.6911 , 3000000],
+      ]);
+    
+      var options = {
+        showTooltip: true,
+        showInfoWindow: true
+      };
+      var map = new google.visualization.Map(document.getElementById('mapw'));
+      map.draw(data, options);
+    };
+  </script>
+</body>
+
+</html>

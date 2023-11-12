@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>CMPE280 Hackathon</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/dashboard/">
+
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="index.css">
+    <style>
+        img {
+            width: 400px;
+            height: 300px;
+        }
+    </style>
+
+
+    <!-- Custom styles for this template -->
+</head>
+
+<body>
+
+    <header class="navbar navbar-dark sticky-top flex-md-nowrap p-0 shadow" style="background-color: grey">
+          <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">
+            <img src="./logo1.png" alt="Logo" style="max-width: 50px; max-height: 50px;">
+          </a>
+        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3">Connected</a> -->
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3">Yield</a>
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3"></a>
+
+        <div>
+        </div>
+
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky pt-3">
+
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item">
+                            <a class="nav-link" id="timeseries" href="index.html" style="font-size: large;">
+                                <span data-feather="file-text"></span>
+                                Time Series Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="crops" href="crops.html" style="font-size: large;">
+                                <span data-feather="file-text"></span>
+                                Crops
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="import-export" href="importexport.html" style="font-size: large;">
+                                <span data-feather="file-text"></span>
+                                Imports
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="crops" href="#" style="font-size: large;">
+                                Yield
+                            </a>
+                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                <li style="margin-left: 15%; "><a href="#" onclick="hide('ban')"
+                                        class="link-dark rounded">Walnuts Iran</a></li>
+                                <li style="margin-left: 15%; "><a href="#" onclick="hide('man')"
+                                        class="link-dark rounded">Philippines Mangoes</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="import" href="sensor.html" style="font-size: large;">
+                                <span data-feather="file-text"></span>
+                                Sensor
+                            </a>
+                        </li>
+                    </ul>
+                    </ul>
+                </div>
+            </nav>
+
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+
+                <div id="ban">
+                    <h2 style="margin-top: 2%; text-align: center;">Walnuts Iran</h2>
+                 
+                        <div id="chart_id2" style="width: 800px; height: 300px;"></div>
+
+                    <div id="chart_id" style="width: 800px; height: 300px;"></div>
+                </div>
+
+                <div id="man">
+                    <h2 style="margin-top: 2%; text-align: center;">Philippines Mangoes</h2>
+                 
+                        <div id="chart_id3" style="width: 800px; height: 300px;"></div>
+
+                    <div id="chart_id4" style="width: 800px; height: 300px;"></div>
+
+                    
+                </div>
+
+            </main>
+
+        </div>
+    </div>
+
+    <script>
+        // Check if connected or local
+
+        function hide(element) {
+            var x = document.getElementById(element);
+            if (element == "ban") {
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                }
+                document.getElementById("man").style.display = "none";
+            }
+            else if (element == "man") {
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                }
+                document.getElementById("ban").style.display = "none";
+
+            }
+
+
+
+        }
+
+
+
+        window.onload = function () {
+            document.getElementById("man").style.display = "none";
+
+        }
+    </script>
+
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawVisualization);
+
+        function drawVisualization() {
+            // Create and populate the data table.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'x');
+            data.addColumn('number', 'Cats');
+            data.addColumn('number', 'Blanket 1');
+            data.addColumn('number', 'Blanket 2');
+            data.addRow(["A", 1, 1, 0.5]);
+            data.addRow(["B", 2, 0.5, 1]);
+            data.addRow(["C", 4, 1, 0.5]);
+            data.addRow(["D", 8, 0.5, 1]);
+            data.addRow(["E", 7, 1, 0.5]);
+            data.addRow(["F", 7, 0.5, 1]);
+            data.addRow(["G", 8, 1, 0.5]);
+            data.addRow(["H", 4, 0.5, 1]);
+            data.addRow(["I", 2, 1, 0.5]);
+            data.addRow(["J", 3.5, 0.5, 1]);
+            data.addRow(["K", 3, 1, 0.5]);
+            data.addRow(["L", 3.5, 0.5, 1]);
+            data.addRow(["M", 1, 1, 0.5]);
+            data.addRow(["N", 1, 0.5, 1]);
+
+
+            // Create and draw the visualization.
+            new google.visualization.LineChart(document.getElementById('visualization')).
+                draw(data, {
+                    curveType: "function", width: 500, height: 400,
+                    vAxes: {
+                        0: { logScale: false },
+                        1: { logScale: false, maxValue: 2 }
+                    },
+                    series: {
+                        0: { targetAxisIndex: 0 },
+                        1: { targetAxisIndex: 1 },
+                        2: { targetAxisIndex: 1 }
+                    }
+                }
+                );
+        }
+    </script>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
+        integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
+        integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
+        crossorigin="anonymous"></script>
+
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script type="text/javascript">
+              google.load("visualization", "1", {packages:["corechart"]});
+              google.setOnLoadCallback(drawChart);
+              function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                ['Year', 'Area harvested (ha)', 'Production (tonnes)'],
+                ["1961",	4400,	8000],
+        ["1962",	4400,	8000],
+        ["1963",	2500,	3000],
+        ["1964",	2500,	3000],
+        ["1965",	2500,	4000],
+        ["1966",	2500,	3000],
+        ["1967",	2500,	4000],
+        ["1968",	3000,	6000],
+        ["1969",	3000,	6000],
+        ["1970",	2000,	4000],
+        ["1971",	1900,	3500],
+        ["1972",	1800,	3200],
+        ["1973",	1700,	3000],
+        ["1974",	1600,	3300],
+        ["1975",	1500,	3100],
+        ["1976",	1500,	2800],
+        ["1977",	1500,	3250],
+        ["1978",	1500,	3000],
+        ["1979",	1500,	3000],
+        ["1980",	2200,	6000],
+        ["1981",	4800,	13000],
+        ["1982",	6283,	18197],
+        ["1983",	6733,	21612],
+        ["1984",	7468,	22996],
+        ["1985",	7840,	31422],
+        ["1986",	11347,	40930],
+        ["1987",	8951,	32957],
+        ["1988",	10544,	37821],
+        ["1989",	12143,	64009],
+        ["1990",	15025,	44482],
+        ["1991",	17973,	64486],
+        ["1992",	22208,	71237],
+        ["1993",	25976,	110819],
+        ["1994",	28975,	117218],
+        ["1995",	32287,	119218],
+        ["1996",	35781,	113185],
+        ["1997",	41766,	124196],
+        ["1998",	45152,	145145],
+        ["1999",	50161,	142906],
+        ["2000",	51971,	129276],
+        ["2001",	61795,	162838],
+        ["2002",	67194,	177673],
+        ["2003",	74979,	204883],
+        ["2004",	88888,	168320],
+        ["2005",	96697,	247864],
+        ["2006",	146010,	367445],
+        ["2007",	119687,	299789],
+        ["2008",	115919,	260355],
+        ["2009",	116794,	279742],
+        ["2010",	117603,	268135],
+        ["2011",	112855,	280275],
+        ["2012",	124843,	284421],
+        ["2013",	109759,	222610],
+        ["2014",	141019,	403158],
+        ["2015",	142000,	420000],
+        ["2016",	71425,	349192],
+        ["2017",	53952,	393598],
+        ["2018",	43946,	304040],
+        ["2019",	44780,	321074],
+        ["2020",	59920,	356666]
+                ]);
+                var options = {
+                  title: 'Leads',
+                //   hAxis: {showTextEvery: 5},
+                  vAxes: {0: {
+                    // viewWindowMode:'explicit',
+                    //           viewWindow:{
+                    //                       max:510,
+                    //                       min:82
+                    //                       },
+                              gridlines: {color: 'transparent'},
+                              },
+                          1: {gridlines: {color: 'transparent'},
+                            //   format:"#%"
+                            },
+                          },
+                  series: {0: {targetAxisIndex:0},
+                           1:{targetAxisIndex:1},
+                        //    2:{targetAxisIndex:1},
+                          },
+                  colors: ["red", "green", "orange"],
+                  chartArea:{left:100,top:100, width:500, height:150},
+                };
+        
+                var chart = new google.visualization.LineChart(document.getElementById('chart_id'));
+                chart.draw(data, options);
+              }
+        </script>
+        <script type="text/javascript">
+            google.load("visualization", "1", {packages:["corechart"]});
+            google.setOnLoadCallback(drawChart);
+            function drawChart() {
+              var data = google.visualization.arrayToDataTable([
+              ['Year', 'Area harvested (ha)', 'Yield (hg/ha)'],
+              ["1961",	4400,	18182],
+      ["1962",	4400,	18182],
+      ["1963",	2500,	12000],
+      ["1964",	2500,	12000],
+      ["1965",	2500,	16000],
+      ["1966",	2500,	12000],
+      ["1967",	2500,	16000],
+      ["1968",	3000,	20000],
+      ["1969",	3000,	20000],
+      ["1970",	2000,	20000],
+      ["1971",	1900,	18421],
+      ["1972",	1800,	17778],
+      ["1973",	1700,	17647],
+      ["1974",	1600,	20625],
+      ["1975",	1500,	20667],
+      ["1976",	1500,	18667],
+      ["1977",	1500,	21667],
+      ["1978",	1500,	20000],
+      ["1979",	1500,	20000],
+      ["1980",	2200,	27273],
+      ["1981",	4800,	27083],
+      ["1982",	6283,	28962],
+      ["1983",	6733,	32099],
+      ["1984",	7468,	30793],
+      ["1985",	7840,	40079],
+      ["1986",	11347,	36071],
+      ["1987",	8951,	36819],
+      ["1988",	10544,	35870],
+      ["1989",	12143,	52713],
+      ["1990",	15025,	29605],
+      ["1991",	17973,	35879],
+      ["1992",	22208,	32077],
+      ["1993",	25976,	42662],
+      ["1994",	28975,	40455],
+      ["1995",	32287,	36924],
+      ["1996",	35781,	31633],
+      ["1997",	41766,	29736],
+      ["1998",	45152,	32146],
+      ["1999",	50161,	28489],
+      ["2000",	51971,	24875],
+      ["2001",	61795,	26351],
+      ["2002",	67194,	26442],
+      ["2003",	74979,	27325],
+      ["2004",	88888,	18936],
+      ["2005",	96697,	25633],
+      ["2006",	146010,	25166],
+      ["2007",	119687,	25048],
+      ["2008",	115919,	22460],
+      ["2009",	116794,	23952],
+      ["2010",	117603,	22800],
+      ["2011",	112855,	24835],
+      ["2012",	124843,	22782],
+      ["2013",	109759,	20282],
+      ["2014",	141019,	28589],
+      ["2015",	142000,	29577],
+      ["2016",	71425,	48889],
+      ["2017",	53952,	72953],
+      ["2018",	43946,	69185],
+      ["2019",	44780,	71700],
+      ["2020",	59920,	59524]
+               
+              ]);
+              var options = {
+                title: 'Leads',
+              //   hAxis: {showTextEvery: 5},
+                vAxes: {0: {
+                  // viewWindowMode:'explicit',
+                  //           viewWindow:{
+                  //                       max:510,
+                  //                       min:82
+                  //                       },
+                            gridlines: {color: 'transparent'},
+                            },
+                        1: {gridlines: {color: 'transparent'},
+                          //   format:"#%"
+                          },
+                        },
+                series: {0: {targetAxisIndex:0},
+                         1:{targetAxisIndex:1},
+                      //    2:{targetAxisIndex:1},
+                        },
+                colors: ["red", "green", "orange"],
+                chartArea:{left:100,top:100, width:500, height:150},
+              };
+      
+              var chart = new google.visualization.LineChart(document.getElementById('chart_id2'));
+              chart.draw(data, options);
+            }
+      </script>
+
+<script type="text/javascript">
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+      ['Year', 'Area harvested (ha)', 'Yield (hg/ha)'],
+      ["1961",	17000,	38912],
+["1962",	18000,	38889],
+["1963",	24000,	38458],
+["1964",	25000,	38034],
+["1965",	35000,	36997],
+["1966",	35000,	37569],
+["1967",	35000,	38312],
+["1968",	37000,	34178],
+["1969",	40000,	35161],
+["1970",	45500,	33333],
+["1971",	40500,	33952],
+["1972",	40790,	35158],
+["1973",	43550,	43077],
+["1974",	43500,	44023],
+["1975",	46620,	51329],
+["1976",	35800,	81872],
+["1977",	36190,	84989],
+["1978",	35400,	94702],
+["1979",	38600,	94119],
+["1980",	39180,	96270],
+["1981",	48817,	75097],
+["1982",	51195,	60865],
+["1983",	51978,	58352],
+["1984",	52745,	64328],
+["1985",	53736,	66194],
+["1986",	54393,	68553],
+["1987",	55464,	66189],
+["1988",	55725,	64807],
+["1989",	56457,	65554],
+["1990",	77137,	58855],
+["1991",	88884,	56078],
+["1992",	92513,	58161],
+["1993",	97623,	57671],
+["1994",	105643,	60677],
+["1995",	114770,	62318],
+["1996",	124105,	64943],
+["1997",	131959,	76584],
+["1998",	136966,	74114],
+["1999",	139878,	63427],
+["2000",	141620,	61331],
+["2001",	145101,	62156],
+["2002",	158598,	61593],
+["2003",	164109,	62577],
+["2004",	167172,	59018],
+["2005",	172413,	58190],
+["2006",	179900,	52049],
+["2007",	192418,	54099],
+["2008",	195175,	45969],
+["2009",	196658,	39943],
+["2010",	197816,	42641],
+["2011",	195401,	40970],
+["2012",	197157,	39736],
+["2013",	196358,	42332],
+["2014",	196412,	45772],
+["2015",	196662,	46628],
+["2016",	195958,	42207],
+["2017",	194367,	38533],
+["2018",	194267,	37326],
+["2019",	194923,	38681],
+["2020",	195135,	38594]
+       
+      ]);
+      var options = {
+        title: 'Leads',
+      //   hAxis: {showTextEvery: 5},
+        vAxes: {0: {
+          // viewWindowMode:'explicit',
+          //           viewWindow:{
+          //                       max:510,
+          //                       min:82
+          //                       },
+                    gridlines: {color: 'transparent'},
+                    },
+                1: {gridlines: {color: 'transparent'},
+                  //   format:"#%"
+                  },
+                },
+        series: {0: {targetAxisIndex:0},
+                 1:{targetAxisIndex:1},
+              //    2:{targetAxisIndex:1},
+                },
+        colors: ["red", "green", "orange"],
+        chartArea:{left:100,top:100, width:500, height:150},
+      };
+
+      var chart = new google.visualization.LineChart(document.getElementById('chart_id3'));
+      chart.draw(data, options);
+    }
+</script>
+
+<script type="text/javascript">
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+      ['Year', 'Area harvested (ha)', 'Production_Tonnes'],
+      ["1961",	17000,	66150],
+["1962",	18000,	70000],
+["1963",	24000,	92300],
+["1964",	25000,	95086],
+["1965",	35000,	129490],
+["1966",	35000,	131490],
+["1967",	35000,	134091],
+["1968",	37000,	126458],
+["1969",	40000,	140644],
+["1970",	45500,	151667],
+["1971",	40500,	137506],
+["1972",	40790,	143409],
+["1973",	43550,	187600],
+["1974",	43500,	191500],
+["1975",	46620,	239298],
+["1976",	35800,	293100],
+["1977",	36190,	307574],
+["1978",	35400,	335244],
+["1979",	38600,	363300],
+["1980",	39180,	377184],
+["1981",	48817,	366600],
+["1982",	51195,	311600],
+["1983",	51978,	303300],
+["1984",	52745,	339300],
+["1985",	53736,	355700],
+["1986",	54393,	372879],
+["1987",	55464,	367108],
+["1988",	55725,	361138],
+["1989",	56457,	370100],
+["1990",	77137,	453986],
+["1991",	88884,	498440],
+["1992",	92513,	538068],
+["1993",	97623,	563001],
+["1994",	105643,	641006],
+["1995",	114770,	715224],
+["1996",	124105,	805972],
+["1997",	131959,	1010596],
+["1998",	136966,	1015109],
+["1999",	139878,	887204],
+["2000",	141620,	868569],
+["2001",	145101,	901893],
+["2002",	158598,	976857],
+["2003",	164109,	1026949],
+["2004",	167172,	986613],
+["2005",	172413,	1003273],
+["2006",	179900,	936370],
+["2007",	192418,	1040966],
+["2008",	195175,	897199],
+["2009",	196658,	785510],
+["2010",	197816,	843508],
+["2011",	195401,	800551],
+["2012",	197157,	783420],
+["2013",	196358,	831224],
+["2014",	196412,	899014],
+["2015",	196662,	917005],
+["2016",	195958,	827075],
+["2017",	194367,	748952],
+["2018",	194267,	725122],
+["2019",	194923,	753985],
+["2020",	195135,	753103]
+       
+      ]);
+      var options = {
+        title: 'Leads',
+      //   hAxis: {showTextEvery: 5},
+        vAxes: {0: {
+          // viewWindowMode:'explicit',
+          //           viewWindow:{
+          //                       max:510,
+          //                       min:82
+          //                       },
+                    gridlines: {color: 'transparent'},
+                    },
+                1: {gridlines: {color: 'transparent'},
+                  //   format:"#%"
+                  },
+                },
+        series: {0: {targetAxisIndex:0},
+                 1:{targetAxisIndex:1},
+              //    2:{targetAxisIndex:1},
+                },
+        colors: ["red", "green", "orange"],
+        chartArea:{left:100,top:100, width:500, height:150},
+      };
+
+      var chart = new google.visualization.LineChart(document.getElementById('chart_id4'));
+      chart.draw(data, options);
+    }
+</script>
+
+</body>
+
+</html>
