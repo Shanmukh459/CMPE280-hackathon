@@ -1,144 +1,190 @@
 // drag and drop
 var cloneId;
 var cnt = 0;
-
 function getDataCountry(country_code, ev){
-
+  // delete Response.Headers['X-Frame-Options'];
   start = document.getElementById("slider-1").value;
   end = document.getElementById("slider-2").value;
+  let country = ""
+  if (country_code === 1) {
+    country = "US"
+  } else if (country_code === 2) {
+    country = "IN"
+  } else {
+    country = "CN"
+  }
+  console.log(ev)
+  if (ev === "gdp-growth-rate") {
+    return `https://data.worldbank.org/share/widget?contextual=default&start=${start}&end=${end}&indicators=AG.CON.FERT.ZS&locations=US`
+    // return "https://data.worldbank.org/share/widget?contextual=default&end="+ end +"&indicators=NY.GDP.MKTP.KD.ZG&locations=US&start="+ start +"&view=chart"
+  } else if (ev = "gdp-current") {
+    return "https://data.worldbank.org/share/widget?contextual=default&end="+ end +"&indicators=NY.GDP.MKTP.KD.ZG&locations=US&start="+ start +"&view=chart"
+  } else if (ev = "current-acc-bln") {
+    return ""
+  } else if (ev = "FDI-net-BoP") {
+    return ""
+  } else if (ev = "FDI-netoutflows-BoP") {
+    return ""
+  } else if (ev = "FDI-inoutflows-BoP") {
+    return ""
+  } else if (ev = "FDI-NetOutflows") {
+    return ""
+  } else if (ev = "agri-contri") {
+    return ""
+  } else if (ev = "manufac") {
+    return ""
+  } else if (ev = "agri-ff") {
+    return ""
+  } else if (ev = "fert") {
+    return ""
+  } else if (ev = "fert-prod") {
+    return ""
+  } else if (ev = "reserves-months") {
+    return ""
+  } else if (ev = "reserves-gold") {
+    return ""
+  } else if (ev = "reserves-ext") {
+    return ""
+  } else if (ev = "debt-service") {
+    return ""
+  } else if (ev = "total-debt") {
+    return ""
+  } else if (ev = "gni") {
+    return ""
+  }
   console.log(country_code, ev)
-  if(country_code == 1){
-    if (ev === "gdp"){
-      return "https://data.worldbank.org/share/widget?contextual=default&end="+ end +"&indicators=NY.GDP.MKTP.KD.ZG&locations=US&start="+ start +"&view=chart"
-    }
-    else if (ev === "fdi_in") {
-      return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=BX.KLT.DINV.WD.GD.ZS&locations=US"
-    }
+  // if(country_code == 1){
+  //   if (ev === "gdp"){
+  //     return "https://data.worldbank.org/share/widget?contextual=default&end="+ end +"&indicators=NY.GDP.MKTP.KD.ZG&locations=US&start="+ start +"&view=chart"
+  //   }
+  //   else if (ev === "fdi_in") {
+  //     return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=BX.KLT.DINV.WD.GD.ZS&locations=US"
+  //   }
 
-    else if (ev === "fdi_out") {
-      return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=BM.KLT.DINV.WD.GD.ZS&locations=US"
-    }
+  //   else if (ev === "fdi_out") {
+  //     return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=BM.KLT.DINV.WD.GD.ZS&locations=US"
+  //   }
 
-    else if (ev === "agri_gdp"){
-      return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=NV.AGR.TOTL.ZS&locations=US"
-    }
+  //   else if (ev === "agri_gdp"){
+  //     return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=NV.AGR.TOTL.ZS&locations=US"
+  //   }
 
-    else if (ev === "credit") {
-      return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=NV.IND.MANF.ZS&locations=US"
-    }
+  //   else if (ev === "credit") {
+  //     return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=NV.IND.MANF.ZS&locations=US"
+  //   }
 
-    else if (ev === "fert") {
-      return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=AG.CON.FERT.ZS&locations=US"
+  //   else if (ev === "fert") {
+  //     return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=AG.CON.FERT.ZS&locations=US"
 
-    }
+  //   }
 
-    else if (ev === "fert_prod") {
-      return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=AG.CON.FERT.PT.ZS&locations=US"
-    }
+  //   else if (ev === "fert_prod") {
+  //     return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=AG.CON.FERT.PT.ZS&locations=US"
+  //   }
 
-    else if (ev === "reserves"){
-      return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=FI.RES.TOTL.CD&locations=US"
-    }
+  //   else if (ev === "reserves"){
+  //     return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=FI.RES.TOTL.CD&locations=US"
+  //   }
 
-    else if (ev === "gni") {
-      return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=NY.GNP.MKTP.CD&locations=US"
-    }
+  //   else if (ev === "gni") {
+  //     return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=NY.GNP.MKTP.CD&locations=US"
+  //   }
 
-    else if (ev === "total_debt"){
-      return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=DT.TDS.DECT.GN.ZS&locations=US"
-    }
-  }
-  else if(country_code == 2){
-    if (ev == "gdp"){
-      return "https://data.worldbank.org/share/widget?end=" + end + "&indicators=NY.GDP.MKTP.KD.ZG&locations=IN&start=" + start + "&view=chart"
-    }
-    else if (ev === "fdi_in") {
-      return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=BX.KLT.DINV.WD.GD.ZS&locations=IN"
-    }
+  //   else if (ev === "total_debt"){
+  //     return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=DT.TDS.DECT.GN.ZS&locations=US"
+  //   }
+  // }
+  // else if(country_code == 2){
+  //   if (ev == "gdp"){
+  //     return "https://data.worldbank.org/share/widget?end=" + end + "&indicators=NY.GDP.MKTP.KD.ZG&locations=IN&start=" + start + "&view=chart"
+  //   }
+  //   else if (ev === "fdi_in") {
+  //     return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=BX.KLT.DINV.WD.GD.ZS&locations=IN"
+  //   }
 
-    else if (ev === "fdi_out") {
-      return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=BM.KLT.DINV.WD.GD.ZS&locations=IN"
-    }
+  //   else if (ev === "fdi_out") {
+  //     return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=BM.KLT.DINV.WD.GD.ZS&locations=IN"
+  //   }
 
-    else if (ev === "agri_gdp"){
-      return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=NV.AGR.TOTL.ZS&locations=IN"
+  //   else if (ev === "agri_gdp"){
+  //     return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=NV.AGR.TOTL.ZS&locations=IN"
 
-    }
+  //   }
 
-    else if (ev === "credit") {
-      return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=NV.IND.MANF.ZS&locations=IN"
+  //   else if (ev === "credit") {
+  //     return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=NV.IND.MANF.ZS&locations=IN"
 
-    }
+  //   }
 
-    else if (ev === "fert") {
-      return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=AG.CON.FERT.ZS&locations=IN"
+  //   else if (ev === "fert") {
+  //     return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=AG.CON.FERT.ZS&locations=IN"
 
-    }
+  //   }
 
-    else if (ev === "fert_prod") {
-      return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=AG.CON.FERT.PT.ZS&locations=IN"
-    }
+  //   else if (ev === "fert_prod") {
+  //     return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=AG.CON.FERT.PT.ZS&locations=IN"
+  //   }
 
-    else if (ev === "reserves"){
-      return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=FI.RES.TOTL.CD&locations=IN"
+  //   else if (ev === "reserves"){
+  //     return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=FI.RES.TOTL.CD&locations=IN"
 
-    }
+  //   }
 
-    else if (ev === "gni") {
-      return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=NY.GNP.MKTP.CD&locations=IN"
+  //   else if (ev === "gni") {
+  //     return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=NY.GNP.MKTP.CD&locations=IN"
 
-    }
+  //   }
 
-    else if (ev === "total_debt"){
-      return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=DT.TDS.DECT.GN.ZS&locations=IN"
-    }
-  }
-  else if(country_code == 3){
-    if (ev == "gdp"){
-      return "https://data.worldbank.org/share/widget?end=" + end + "&indicators=NY.GDP.MKTP.KD.ZG&locations=CN&start=" + start + "&view=chart"
-    }
-    else if (ev === "fdi_in") {
-      return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=BX.KLT.DINV.WD.GD.ZS&locations=CN"
+  //   else if (ev === "total_debt"){
+  //     return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=DT.TDS.DECT.GN.ZS&locations=IN"
+  //   }
+  // }
+  // else if(country_code == 3){
+  //   if (ev == "gdp"){
+  //     return "https://data.worldbank.org/share/widget?end=" + end + "&indicators=NY.GDP.MKTP.KD.ZG&locations=CN&start=" + start + "&view=chart"
+  //   }
+  //   else if (ev === "fdi_in") {
+  //     return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=BX.KLT.DINV.WD.GD.ZS&locations=CN"
 
-    }
-    else if (ev === "fdi_out") {
-      return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=BM.KLT.DINV.WD.GD.ZS&locations=CN"
-    }
+  //   }
+  //   else if (ev === "fdi_out") {
+  //     return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=BM.KLT.DINV.WD.GD.ZS&locations=CN"
+  //   }
 
-    else if (ev === "agri_gdp"){
-      return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=NV.AGR.TOTL.ZS&locations=CN"
+  //   else if (ev === "agri_gdp"){
+  //     return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=NV.AGR.TOTL.ZS&locations=CN"
 
-    }
+  //   }
 
-    else if (ev === "credit") {
-      return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=NV.IND.MANF.ZS&locations=CN"
+  //   else if (ev === "credit") {
+  //     return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=NV.IND.MANF.ZS&locations=CN"
 
-    }
+  //   }
 
-    else if (ev === "fert") {
-      return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=AG.CON.FERT.ZS&locations=CN"
-    }
+  //   else if (ev === "fert") {
+  //     return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=AG.CON.FERT.ZS&locations=CN"
+  //   }
 
-    else if (ev === "fert_prod") {
-      return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=AG.CON.FERT.PT.ZS&locations=CN"
+  //   else if (ev === "fert_prod") {
+  //     return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=AG.CON.FERT.PT.ZS&locations=CN"
 
-    }
+  //   }
 
-    else if (ev === "reserves"){
-      return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=FI.RES.TOTL.CD&locations=CN"
+  //   else if (ev === "reserves"){
+  //     return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=FI.RES.TOTL.CD&locations=CN"
 
-    }
+  //   }
 
-    else if (ev === "gni") {
-      return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=NY.GNP.MKTP.CD&locations=CN"
+  //   else if (ev === "gni") {
+  //     return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=NY.GNP.MKTP.CD&locations=CN"
 
-    }
+  //   }
 
-    else if (ev === "total_debt"){
-      console.log("entered")
-      return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=DT.TDS.DECT.GN.ZS&locations=CN"
-    }
-  }
+  //   else if (ev === "total_debt"){
+  //     console.log("entered")
+  //     return "https://data.worldbank.org/share/widget?start="+ start +"&end="+ end +"&indicators=DT.TDS.DECT.GN.ZS&locations=CN"
+  //   }
+  // }
 
 
 }
@@ -153,49 +199,82 @@ function drag(ev) {
 
 function drop(ev) {
   ev.preventDefault();
-  let newElem;
+  let newElem = "";
+  console.log(ev)
   country = document.querySelector(".form-select").value || '1';
-  if (cloneId === "gdp") {
-    console.log('yes',country)
-    console.log(getDataCountry(country,ev))
-    document.getElementById(`iframe_div1_${country}`).src = getDataCountry(country, cloneId)
+  if (cloneId === "gdp-growth-rate") {
+    console.log('yes', country)
+    // document.getElementById(div1).innerHTML = getDataCountry(1, cloneId)
     newElem = document.getElementById(`iframe_div1_${country}`).cloneNode(false);
-  } 
-  else if (cloneId === "fdi_in") {
+    console.log(newElem)
+  }
+  else if (cloneId === "gdp-current") {
     document.getElementById(`iframe_div2_${country}`).src = getDataCountry(country, cloneId)
     newElem = document.getElementById(`iframe_div2_${country}`).cloneNode(false);
   } 
-  else if (cloneId === "fdi_out") {
+  else if (cloneId === "current-acc-bln") {
     document.getElementById(`iframe_div3_${country}`).src = getDataCountry(country, cloneId)
     newElem = document.getElementById(`iframe_div3_${country}`).cloneNode(false);
   } 
-  else if (cloneId === "agri_gdp") {
+  else if (cloneId === "FDI-net-BoP") {
     document.getElementById(`iframe_div4_${country}`).src = getDataCountry(country, cloneId)
     newElem = document.getElementById(`iframe_div4_${country}`).cloneNode(false);
   } 
-  else if (cloneId === "credit") {
+  else if (cloneId === "FDI-netoutflows-BoP") {
     document.getElementById(`iframe_div5_${country}`).src = getDataCountry(country, cloneId)
     newElem = document.getElementById(`iframe_div5_${country}`).cloneNode(false);
   } 
-  else if (cloneId === "fert") {
+  else if (cloneId === "FDI-netinflows-BoP") {
     document.getElementById(`iframe_div6_${country}`).src = getDataCountry(country, cloneId)
     newElem = document.getElementById(`iframe_div6_${country}`).cloneNode(false);
   } 
-  else if (cloneId === "fert_prod") {
+  else if (cloneId === "FDI-NetOutflows") {
     document.getElementById(`iframe_div7_${country}`).src = getDataCountry(country, cloneId)
     newElem = document.getElementById(`iframe_div7_${country}`).cloneNode(false);
   } 
-  else if (cloneId === "reserves") {
+  else if (cloneId === "agri-contri") {
     document.getElementById(`iframe_div8_${country}`).src = getDataCountry(country, cloneId)
     newElem = document.getElementById(`iframe_div8_${country}`).cloneNode(false);
   } 
-  else if (cloneId === "gni") {
+  else if (cloneId === "manufac") {
     document.getElementById(`iframe_div9_${country}`).src = getDataCountry(country, cloneId)
     newElem = document.getElementById(`iframe_div9_${country}`).cloneNode(false);
   } 
-  else if (cloneId === "total_debt") {
+  else if (cloneId === "agri-ff") {
     document.getElementById(`iframe_div10_${country}`).src = getDataCountry(country, cloneId)
     newElem = document.getElementById(`iframe_div10_${country}`).cloneNode(false);
+  } 
+  else if (cloneId === "fert") {
+    document.getElementById(`iframe_div11_${country}`).src = getDataCountry(country, cloneId)
+    newElem = document.getElementById(`iframe_div11_${country}`).cloneNode(false);
+  } 
+  else if (cloneId === "fert-prod") {
+    document.getElementById(`iframe_div12_${country}`).src = getDataCountry(country, cloneId)
+    newElem = document.getElementById(`iframe_div12_${country}`).cloneNode(false);
+  }
+  else if (cloneId === "reserves-months") {
+    document.getElementById(`iframe_div13_${country}`).src = getDataCountry(country, cloneId)
+    newElem = document.getElementById(`iframe_div13_${country}`).cloneNode(false);
+  }
+  else if (cloneId === "reserves-gold") {
+    document.getElementById(`iframe_div14_${country}`).src = getDataCountry(country, cloneId)
+    newElem = document.getElementById(`iframe_div14_${country}`).cloneNode(false);
+  }
+  else if (cloneId === "reserves-ext") {
+    document.getElementById(`iframe_div15_${country}`).src = getDataCountry(country, cloneId)
+    newElem = document.getElementById(`iframe_div15_${country}`).cloneNode(false);
+  }
+  else if (cloneId === "debt-service") {
+    document.getElementById(`iframe_div16_${country}`).src = getDataCountry(country, cloneId)
+    newElem = document.getElementById(`iframe_div16_${country}`).cloneNode(false);
+  }
+  else if (cloneId === "total-debt") {
+    document.getElementById(`iframe_div17_${country}`).src = getDataCountry(country, cloneId)
+    newElem = document.getElementById(`iframe_div17_${country}`).cloneNode(false);
+  }
+  else if (cloneId === "gni") {
+    document.getElementById(`iframe_div18_${country}`).src = getDataCountry(country, cloneId)
+    newElem = document.getElementById(`iframe_div18_${country}`).cloneNode(false);
   } 
   else if (cloneId === "EG_Imports_Sankey") {
     newElem = document.getElementById("EG_Wheat_Chart").cloneNode(false);
@@ -208,32 +287,33 @@ function drop(ev) {
   } 
   else if (cloneId === "SA_Imports_Pie") {
     newElem = document.getElementById("SA_Wheat_Pie_Chart").cloneNode(false);
-  } else if(cloneId==="macro-eco"){
-    ele1 = document.getElementById(`iframe_div1_${country}`).cloneNode(false);
-    ele2 = document.getElementById(`iframe_div2_${country}`).cloneNode(false);
-    ele3 = document.getElementById(`iframe_div3_${country}`).cloneNode(false);
-    ev.target.appendChild(ele1);
-    ev.target.appendChild(ele2);
-    ev.target.appendChild(ele3);
-  }
-  else if(cloneId==="agriculture"){
-    ele1 = document.getElementById(`iframe_div4_${country}`).cloneNode(false);
-    ele2 = document.getElementById(`iframe_div5_${country}`).cloneNode(false);
-    ele3 = document.getElementById(`iframe_div6_${country}`).cloneNode(false);
-    ev.target.appendChild(ele1);
-    ev.target.appendChild(ele2);
-    ev.target.appendChild(ele3);
-  }
-  else if(cloneId==="debt_services"){
-    ele1 = document.getElementById(`iframe_div7_${country}`).cloneNode(false);
-    ele2 = document.getElementById(`iframe_div8_${country}`).cloneNode(false);
-    ele3 = document.getElementById(`iframe_div9_${country}`).cloneNode(false);
-    ele4 = document.getElementById(`iframe_div10_${country}`).cloneNode(false);
-    ev.target.appendChild(ele1);
-    ev.target.appendChild(ele2);
-    ev.target.appendChild(ele3);
-    ev.target.appendChild(ele4);
-  }
+  } 
+  // else if(cloneId==="macro-eco"){
+  //   ele1 = document.getElementById(`iframe_div1_${country}`).cloneNode(false);
+  //   ele2 = document.getElementById(`iframe_div2_${country}`).cloneNode(false);
+  //   ele3 = document.getElementById(`iframe_div3_${country}`).cloneNode(false);
+  //   ev.target.appendChild(ele1);
+  //   ev.target.appendChild(ele2);
+  //   ev.target.appendChild(ele3);
+  // }
+  // else if(cloneId==="agriculture"){
+  //   ele1 = document.getElementById(`iframe_div4_${country}`).cloneNode(false);
+  //   ele2 = document.getElementById(`iframe_div5_${country}`).cloneNode(false);
+  //   ele3 = document.getElementById(`iframe_div6_${country}`).cloneNode(false);
+  //   ev.target.appendChild(ele1);
+  //   ev.target.appendChild(ele2);
+  //   ev.target.appendChild(ele3);
+  // }
+  // else if(cloneId==="debt_services"){
+  //   ele1 = document.getElementById(`iframe_div7_${country}`).cloneNode(false);
+  //   ele2 = document.getElementById(`iframe_div8_${country}`).cloneNode(false);
+  //   ele3 = document.getElementById(`iframe_div9_${country}`).cloneNode(false);
+  //   ele4 = document.getElementById(`iframe_div10_${country}`).cloneNode(false);
+  //   ev.target.appendChild(ele1);
+  //   ev.target.appendChild(ele2);
+  //   ev.target.appendChild(ele3);
+  //   ev.target.appendChild(ele4);
+  // }
   else{}
   if(newElem){
     ev.target.appendChild(newElem);
@@ -242,7 +322,6 @@ function drop(ev) {
 
 function changeDashboard(e, page) {
   e.preventDefault();
-  console.log("clicked", page);
   if (page === "predict") {
     document.getElementById("predict").style.display = "block";
     document.getElementById("draggable_playground").style.display = "none";
@@ -261,22 +340,23 @@ window.onload = function () {
 
 function slideOne() {
   let sliderOne = document.getElementById("slider-1");
-let sliderTwo = document.getElementById("slider-2");
-let displayValOne = document.getElementById("range1");
-let displayValTwo = document.getElementById("range2");
-let minGap = 10;
+  let sliderTwo = document.getElementById("slider-2");
+  let displayValOne = document.getElementById("range1");
+  let displayValTwo = document.getElementById("range2");
+  let minGap = 10;
   if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
     sliderOne.value = parseInt(sliderTwo.value) - minGap;
   }
   displayValOne.textContent = sliderOne.value;
   fillColor(sliderOne,sliderTwo);
 }
+
 function slideTwo() {
   let sliderOne = document.getElementById("slider-1");
-let sliderTwo = document.getElementById("slider-2");
-let displayValOne = document.getElementById("range1");
-let displayValTwo = document.getElementById("range2");
-let minGap = 10;
+  let sliderTwo = document.getElementById("slider-2");
+  let displayValOne = document.getElementById("range1");
+  let displayValTwo = document.getElementById("range2");
+  let minGap = 10;
   if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
     sliderTwo.value = parseInt(sliderOne.value) + minGap;
   }
@@ -286,7 +366,7 @@ let minGap = 10;
 
 function fillColor(sliderOne,sliderTwo) {
   let sliderTrack = document.querySelector(".slider-track");
-let sliderMaxValue = document.getElementById("slider-1").max;
+  let sliderMaxValue = document.getElementById("slider-1").max;
   percent1 = sliderOne.value * 10;
   percent2 = (sliderMaxValue - sliderTwo.value) * 10;
   // percent3 = (sliderMaxValue - sliderTwo.value) * 10;
@@ -297,7 +377,7 @@ function onClickMenuItem(ev) {
   let newElem;
   country = document.querySelector(".form-select").value || '1';
 
-  if (ev === "gdp") {
+  if (ev === "gdp-growth-rate") {
     document.getElementById(`iframe_div1_${country}`).src = getDataCountry(country, ev)
     newElem = document.getElementById(`iframe_div1_${country}`).cloneNode(false);
   }

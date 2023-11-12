@@ -31,6 +31,8 @@
         integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
         crossorigin="anonymous"></script>
     <script src="./script.js"></script>
+    <script src="https://unpkg.com/@ungap/custom-elements-builtin"></script>
+    <script type="module" src="https://unpkg.com/x-frame-bypass"></script>
 </head>
 
 <body>
@@ -80,7 +82,31 @@
                             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
                                 data-bs-parent="#accordionExample">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                    <li><a href="#" class="link-dark rounded" id="gdp" draggable="true"
+                                    <li><a href="#" class="link-dark rounded" id="gdp-growth-rate" draggable="true"
+                                        ondragstart="drag(event)" onclick="onClickMenuItem('gdp-growth-rate')">GDP Growth Rate</a>
+                                    </li>
+                                    <li><a href="#" class="link-dark rounded" id="gdp-current" draggable="true"
+                                        ondragstart="drag(event)" onclick="onClickMenuItem('gdp-current')">GDP Current USD</a>
+                                    </li>
+                                    <li><a href="#" class="link-dark rounded" id="current-acc-bln" draggable="true"
+                                        ondragstart="drag(event)" onclick="onClickMenuItem('current-acc-bln')">Current Acc Bln</a>
+                                    </li>
+                                    <li><a href="#" class="link-dark rounded" id="FDI-net-BoP" draggable="true"
+                                        ondragstart="drag(event)" onclick="onClickMenuItem('FDI-net-BoP')">FDI net BoP</a>
+                                    </li>
+                                    <li><a href="#" class="link-dark rounded" id="FDI-netoutflows-BoP" draggable="true"
+                                        ondragstart="drag(event)" onclick="onClickMenuItem('FDI-netoutflows-BoP')">FDI netoutflows BoP</a>
+                                    </li>
+                                    <li><a href="#" class="link-dark rounded" id="FDI-netinflows-BoP" draggable="true"
+                                        ondragstart="drag(event)" onclick="onClickMenuItem('FDI-netinflows-BoP')">FDI inflows BoP</a>
+                                    </li>
+                                    <li><a href="#" class="link-dark rounded" id="FDI-NetOutflows" draggable="true"
+                                        ondragstart="drag(event)" onclick="onClickMenuItem('FDI-NetOutflows')">FDI-NetOutflows</a>
+                                    </li>
+
+
+
+                                    <!-- <li><a href="#" class="link-dark rounded" id="gdp" draggable="true"
                                         ondragstart="drag(event)" onclick="onClickMenuItem('gdp')">GDP current(USD)</a>
                                     </li>
                                     <li><a href="#" class="link-dark rounded" id="fdi_in" draggable="true"
@@ -88,7 +114,7 @@
                                             Inflow(USD)</a></li>
                                     <li><a href="#" class="link-dark rounded" id="fdi_out" draggable="true"
                                             ondragstart="drag(event)" onclick="onClickMenuItem('fdi_out')">FDI
-                                            Outflows(USD)</a></li>
+                                            Outflows(USD)</a></li> -->
                                 </ul>
                             </div>
                         </div>
@@ -104,17 +130,21 @@
                             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
                                 data-bs-parent="#accordionExample">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                    <li><a href="#" class="link-dark rounded" id="agri_gdp" draggable="true"
-                                            ondragstart="drag(event)" onclick="onClickMenuItem('agri_gdp')">Contribution
-                                            of Agri(%GDP)</a></li>
-                                    <li><a href="#" class="link-dark rounded" id="credit" draggable="true"
-                                            ondragstart="drag(event)" onclick="onClickMenuItem('credit')">Credit</a>
+                                    <li><a href="#" class="link-dark rounded" id="agri-contri" draggable="true"
+                                            ondragstart="drag(event)" onclick="onClickMenuItem('agri-contri')">Agricultural Contribution</a>
+                                    </li>
+                                    <li><a href="#" class="link-dark rounded" id="manufac" draggable="true"
+                                        ondragstart="drag(event)" onclick="onClickMenuItem('manufac')">Manufacturing</a>
+                                    </li>
+
+                                    <li><a href="#" class="link-dark rounded" id="agri-ff" draggable="true"
+                                            ondragstart="drag(event)" onclick="onClickMenuItem('agri-ff')">Agri, Forest, Fishing</a>
                                     </li>
                                     <li><a href="#" class="link-dark rounded" id="fert" draggable="true"
                                             ondragstart="drag(event)" onclick="onClickMenuItem('fert')">Fertilizers</a>
                                     </li>
-                                    <li><a href="#" class="link-dark rounded" id="fert_prod" draggable="true"
-                                            ondragstart="drag(event)" onclick="onClickMenuItem('fert_prod')">Fertilizers
+                                    <li><a href="#" class="link-dark rounded" id="fert-prod" draggable="true"
+                                            ondragstart="drag(event)" onclick="onClickMenuItem('fert-prod')">Fertilizers
                                             PROD</a></li>
                                 </ul>
                             </div>
@@ -131,14 +161,24 @@
                             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
                                 data-bs-parent="#accordionExample">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                    <li><a href="#" class="link-dark rounded" id="reserves" draggable="true"
-                                            ondragstart="drag(event)" onclick="onClickMenuItem('reserves')">Reserves</a>
+                                    <li><a href="#" class="link-dark rounded" id="reserves-months" draggable="true"
+                                            ondragstart="drag(event)" onclick="onClickMenuItem('reserves-months')">Reserves in Months</a>
                                     </li>
+                                    <li><a href="#" class="link-dark rounded" id="reserves-gold" draggable="true"
+                                        ondragstart="drag(event)" onclick="onClickMenuItem('reserves-gold')">Reserves (Gold included)</a>
+                                    </li>
+                                    <li><a href="#" class="link-dark rounded" id="reserves-ext" draggable="true"
+                                        ondragstart="drag(event)" onclick="onClickMenuItem('reserves-ext')">Total reserves (external debt)</a>
+                                    </li>
+                                    <li><a href="#" class="link-dark rounded" id="debt-service" draggable="true"
+                                        ondragstart="drag(event)" onclick="onClickMenuItem('debt-service')">Debt Service</a>
+                                    </li>
+                                    <li><a href="#" class="link-dark rounded" id="total-debt" draggable="true"
+                                        ondragstart="drag(event)" onclick="onClickMenuItem('total-debt')">Total
+                                        Debt(%GNI)</a></li>                                
                                     <li><a href="#" class="link-dark rounded" id="gni" draggable="true"
                                             ondragstart="drag(event)" onclick="onClickMenuItem('gni')">GNI</a></li>
-                                    <li><a href="#" class="link-dark rounded" id="total_debt" draggable="true"
-                                            ondragstart="drag(event)" onclick="onClickMenuItem('total_debt')">Total
-                                            Debt(%)</a></li>
+                                    
                                 </ul>
                             </div>
                         </div>
@@ -181,7 +221,7 @@
                         </span>
                         <span> &dash; </span>
                         <span id="range2">
-                            2023
+                            2020
                         </span>
                         <br />
                     </div>
@@ -190,8 +230,8 @@
                     </div>
                     <div class="container2">
                         <div class="slider-track"></div>
-                        <input type="range" min="1961" max="2022" value="1961" id="slider-1" oninput="slideOne()">
-                        <input type="range" min="1961" max="2023" value="2023" id="slider-2" oninput="slideTwo()">
+                        <input type="range" min="1961" max="2019" value="1961" id="slider-1" oninput="slideOne()">
+                        <input type="range" min="1961" max="2020" value="2020" id="slider-2" oninput="slideTwo()">
                     </div>
                     
                 </div>
@@ -207,38 +247,30 @@
                     </tr>
                     <tr>
                         <td class="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
-
                     </tr>
                     <tr>
                         <td class="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
-
                     </tr>
                     <tr>
                         <td class="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
-
                     </tr>
                     <tr>
                         <td class="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
-
                     </tr>
                     <tr>
                         <td class="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
-
                     </tr>
                     <tr>
                         <td class="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
-
                     </tr>
                     <tr>
                         <td class="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
-
                     </tr>
+                    
                 </table>
             </div>
-
-
-
         </div>
+        
         <div id="predict" style="display:none;margin-top:100px;margin-bottom:2500px;">
 
 
@@ -329,151 +361,248 @@
 
         <div class="alldiag" style="display:none;">
             <!--Macroeconomics-->
-            <!--GDP growth (annual %) - United States-->
+            <!--GDP growth rate - united states-->
             <iframe id="iframe_div1_1" onclick="Dataset()"
                 width='800' height='533' frameBorder='0' scrolling="no"></iframe>
 
-            <!--GDP growth (annual %) - India-->
-            <iframe id="iframe_div1_2"
-                width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+            <!--GDP growth rate - India-->  
+            <iframe id="iframe_div1_2" onclick="Dataset()"
+            width='800' height='533' frameBorder='0' scrolling="no"></iframe>
 
-            <!--GDP growth (annual %) - China-->
-            <iframe id="iframe_div1_3"
-                width='800' height='533' frameBorder='0' scrolling="no"></iframe>
-
-
-
-            <!--Foreign direct investment, net inflows (% of GDP) - United States-->
-            <iframe id="iframe_div2_1"
-                width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+            <!--GDP growth rate - China-->  
+            <iframe id="iframe_div1_3" onclick="Dataset()"
+            width='800' height='533' frameBorder='0' scrolling="no"></iframe>
 
 
+            <!--GDP Current - united states-->
+            <iframe id="iframe_div2_1" onclick="Dataset()"
+            width='800' height='533' frameBorder='0' scrolling="no"></iframe>
 
-            <!--Foreign direct investment, net inflows (% of GDP) - India-->
-            <iframe id="iframe_div2_2"
-                width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+            <!--GDP Current - India-->
+            <iframe id="iframe_div2_2" onclick="Dataset()"
+            width='800' height='533' frameBorder='0' scrolling="no"></iframe>
 
-            <!--Foreign direct investment, net inflows (% of GDP) - China-->
-            <iframe id="iframe_div2_3"
-                width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+            <!--GDP Current - China-->
+            <iframe id="iframe_div2_3" onclick="Dataset()"
+            width='800' height='533' frameBorder='0' scrolling="no"></iframe>
 
 
+            <!--Current Acc Balance - US-->
+            <iframe id="iframe_div3_1" onclick="Dataset()"
+            width='800' height='533' frameBorder='0' scrolling="no"></iframe>
 
-            <!--Foreign direct investment, net outflows (% of GDP) - United States-->
-            <iframe id="iframe_div3_1"
-                width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+            <!--Current Acc Balance - India-->
+            <iframe id="iframe_div3_2" onclick="Dataset()"
+            width='800' height='533' frameBorder='0' scrolling="no"></iframe>
 
-            <!--Foreign direct investment, net outflows (% of GDP) - India-->
-            <iframe id="iframe_div3_2"
-                width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+            <!--Current Acc Balance - China-->
+            <iframe id="iframe_div3_3" onclick="Dataset()"
+            width='800' height='533' frameBorder='0' scrolling="no"></iframe>
 
-            <!--Foreign direct investment, net outflows (% of GDP) - China-->
-            <iframe id="iframe_div3_3"
-                width='800' height='533' frameBorder='0' scrolling="no"></iframe>
 
+            <!--Foreign Direct Investment, net - US-->
+            <iframe id="iframe_div4_1" onclick="Dataset()"
+            width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+
+            <!--Foreign Direct Investment, net - India-->
+            <iframe id="iframe_div4_2" onclick="Dataset()"
+            width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+
+            <!--Foreign Direct Investment, net - China-->
+            <iframe id="iframe_div4_3" onclick="Dataset()"
+            width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+
+
+            <!--Foreign Direct Investment, net outflows - US-->
+            <iframe id="iframe_div5_1" onclick="Dataset()"
+            width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+
+            <!--Foreign Direct Investment, net outflows - India-->
+            <iframe id="iframe_div5_2" onclick="Dataset()"
+            width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+
+            <!--Foreign Direct Investment, net outflows - China-->
+            <iframe id="iframe_div5_3" onclick="Dataset()"
+            width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+
+
+            <!--Foreign Direct Investment, net inflows - US-->
+            <iframe id="iframe_div6_1" onclick="Dataset()"
+            width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+
+            <!--Foreign Direct Investment, net inflows - India-->
+            <iframe id="iframe_div6_2" onclick="Dataset()"
+            width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+
+            <!--Foreign Direct Investment, net inflows - China-->
+            <iframe id="iframe_div6_3" onclick="Dataset()"
+            width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+
+
+            <!--FDI-NetOutflows - US-->
+            <iframe id="iframe_div7_1" onclick="Dataset()"
+            width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+
+            <!--FDI-NetOutflows - India-->
+            <iframe id="iframe_div7_2" onclick="Dataset()"
+            width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+
+            <!--FDI-NetOutflows - China-->
+            <iframe id="iframe_div7_3" onclick="Dataset()"
+            width='800' height='533' frameBorder='0' scrolling="no"></iframe>
 
 
             <!--Agricultural-->
+            <!--Agricultural Contributor - US-->
+            <iframe id="iframe_div8_1"
+                width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+
+            <!--Agricultural Contributor - India-->
+            <iframe id="iframe_div8_2"
+                width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+
+            <!--Agricultural Contributor - China-->
+            <iframe id="iframe_div8_3"
+                width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+
+
+            <!--Manufacturing - US-->
+            <iframe id="iframe_div9_1"
+                width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+
+            <!--Manufacturing - India-->
+            <iframe id="iframe_div9_2"
+                width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+
+            <!--Manufacturing - China-->
+            <iframe id="iframe_div9_3"
+                width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+
+
             <!--Agriculture, forestry, and fishing, value added (% of GDP) - United States-->
-            <iframe id="iframe_div4_1"
+            <iframe id="iframe_div10_1"
                 width='800' height='533' frameBorder='0' scrolling="no"></iframe>
 
             <!--Agriculture, forestry, and fishing, value added (% of GDP) - India-->
-            <iframe id="iframe_div4_2"
+            <iframe id="iframe_div10_2"
                 width='800' height='533' frameBorder='0' scrolling="no"></iframe>
 
             <!--Agriculture, forestry, and fishing, value added (% of GDP) - China-->
-            <iframe id="iframe_div4_3"
+            <iframe id="iframe_div10_3"
                 width='800' height='533' frameBorder='0' scrolling="no"></iframe>
-
-
-
-            <!--Manufacturing, value added (% of GDP) - United States-->
-            <iframe id="iframe_div5_1"
-                width='800' height='533' frameBorder='0' scrolling="no"></iframe>
-
-            <!--Manufacturing, value added (% of GDP) - India-->
-            <iframe id="iframe_div5_2"
-                width='800' height='533' frameBorder='0' scrolling="no"></iframe>
-
-            <!--Manufacturing, value added (% of GDP) - China-->
-            <iframe id="iframe_div5_3"
-                width='800' height='533' frameBorder='0' scrolling="no"></iframe>
-
 
 
             <!--Fertilizer consumption (kilograms per hectare of arable land) - United States-->
-            <iframe id="iframe_div6_1"
+            <iframe id="iframe_div11_1"
                 width='800' height='533' frameBorder='0' scrolling="no"></iframe>
 
             <!--Fertilizer consumption (kilograms per hectare of arable land) - India-->
-            <iframe id="iframe_div6_2"
+            <iframe id="iframe_div11_2"
                 width='800' height='533' frameBorder='0' scrolling="no"></iframe>
 
             <!--Fertilizer consumption (kilograms per hectare of arable land) - China-->
-            <iframe id="iframe_div6_3"
+            <iframe id="iframe_div11_3"
                 width='800' height='533' frameBorder='0' scrolling="no"></iframe>
-
 
 
             <!--Fertilizer consumption (% of fertilizer production) - United States-->
-            <iframe id="iframe_div7_1"
+            <iframe id="iframe_div12_1"
                 width='800' height='533' frameBorder='0' scrolling="no"></iframe>
 
             <!--Fertilizer consumption (% of fertilizer production) - India-->
-            <iframe id="iframe_div7_2"
+            <iframe id="iframe_div12_2"
                 width='800' height='533' frameBorder='0' scrolling="no"></iframe>
 
             <!--Fertilizer consumption (% of fertilizer production) - China-->
-            <iframe id="iframe_div7_3"
+            <iframe id="iframe_div12_3"
                 width='800' height='533' frameBorder='0' scrolling="no"></iframe>
 
 
 
             <!--Debt-->
-            <!--Total reserves (includes gold, current US$) - United States-->
-            <iframe id="iframe_div8_1"
+            <!--Total reserves in months of imports - United States-->
+            <iframe id="iframe_div13_1"
                 width='800' height='533' frameBorder='0' scrolling="no"></iframe>
 
+            <!--Total reserves in months of imports - India-->
+            <iframe id="iframe_div13_2"
+                width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+
+            <!--Total reserves in months of imports - China-->
+            <iframe id="iframe_div13_3"
+                width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+
+
+            <!--Total reserves (includes gold, current US$) - US-->
+            <iframe id="iframe_div14_1"
+                width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+            
             <!--Total reserves (includes gold, current US$) - India-->
-            <iframe id="iframe_div8_2"
+            <iframe id="iframe_div14_2"
                 width='800' height='533' frameBorder='0' scrolling="no"></iframe>
-
+            
             <!--Total reserves (includes gold, current US$) - China-->
-            <iframe id="iframe_div8_3"
-                width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+            <iframe id="iframe_div14_3"
+            width='800' height='533' frameBorder='0' scrolling="no"></iframe>
 
 
+            <!--Total reserves (% of total external debt) - US-->
+            <iframe id="iframe_div15_1"
+            width='800' height='533' frameBorder='0' scrolling="no"></iframe>
 
-            <!--GNI (current US$) - United States-->
-            <iframe id="iframe_div9_1"
-                width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+            <!--Total reserves (% of total external debt) - India-->
+            <iframe id="iframe_div15_2"
+            width='800' height='533' frameBorder='0' scrolling="no"></iframe>
 
-            <!--GNI (current US$) - India-->
-            <iframe id="iframe_div9_2"
-                width='800' height='533' frameBorder='0' scrolling="no"></iframe>
-
-            <!--GNI (current US$) - China-->
-            <iframe id="iframe_div9_3"
-                width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+            <!--Total reserves (% of total external debt) - China-->
+            <iframe id="iframe_div15_3"
+            width='800' height='533' frameBorder='0' scrolling="no"></iframe>
 
 
+            <!--Debt service (PPG and IMF only, % of exports of goods, services and primary income) - US-->
+            <iframe id="iframe_div16_1"
+            width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+
+            <!--Debt service (PPG and IMF only, % of exports of goods, services and primary income) - India-->
+            <iframe id="iframe_div16_2"
+            width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+
+            <!--Debt service (PPG and IMF only, % of exports of goods, services and primary income) - China-->
+            <iframe id="iframe_div16_3"
+            width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+            
 
             <!--Total debt service (% of GNI) - Low & middle income-->
-            <iframe id="iframe_div10_1"
+            <iframe id="iframe_div17_1"
                 src="https://data.worldbank.org/share/widget?start=1961&end=2020&indicators=DT.TDS.DECT.GN.ZS&locations=US"
                 width='800' height='533' frameBorder='0' scrolling="no"></iframe>
 
             <!--Total debt service (% of GNI) - India-->
-            <iframe id="iframe_div10_2"
+            <iframe id="iframe_div17_2"
                 src="https://data.worldbank.org/share/widget?start=1961&end=2020&indicators=DT.TDS.DECT.GN.ZS&locations=IN"
                 width='800' height='533' frameBorder='0' scrolling="no"></iframe>
 
             <!--Total debt service (% of GNI) - China-->
-            <iframe id="iframe_div10_3"
+            <iframe id="iframe_div17_3"
                 src="https://data.worldbank.org/share/widget?start=1961&end=2020&indicators=DT.TDS.DECT.GN.ZS&locations=CN"
                 width='800' height='533' frameBorder='0' scrolling="no"></iframe>
 
+
+            <!--GNI (current US$) - United States-->
+            <iframe id="iframe_div18_1"
+                width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+
+            <!--GNI (current US$) - India-->
+            <iframe id="iframe_div18_2"
+                width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+
+            <!--GNI (current US$) - China-->
+            <iframe id="iframe_div18_3"
+                width='800' height='533' frameBorder='0' scrolling="no"></iframe>
+
+
+
+            
 
 
 
